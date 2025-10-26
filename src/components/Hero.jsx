@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -7,6 +7,16 @@ const img2 = 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=
 const img3 = 'https://images.unsplash.com/photo-1549576490-b0b4831ef60a?auto=format&fit=crop&w=1200&q=80'
 
 export default function Hero() {
+  useEffect(() => {
+    if (!document.querySelector('script[data-dotlottie]')) {
+      const s = document.createElement('script')
+      s.src = 'https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js'
+      s.async = true
+      s.setAttribute('data-dotlottie', 'true')
+      document.body.appendChild(s)
+    }
+  }, [])
+
   return (
     <section className="relative">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:py-16">
@@ -37,17 +47,17 @@ export default function Hero() {
             className="mt-6 flex flex-wrap gap-3"
           >
             <a
-              href="#new"
+              href="#builder"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-tr from-fuchsia-500 to-cyan-400 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/20 transition hover:brightness-110"
             >
-              Shop New Drops
+              Build Your Fit
               <ArrowRight size={18} />
             </a>
             <a
-              href="#builder"
+              href="#trending"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white/70 px-5 py-3 text-sm font-semibold hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900/70 dark:hover:bg-zinc-800"
             >
-              Build Your Fit
+              Explore Trends
             </a>
           </motion.div>
           <motion.div
@@ -96,7 +106,7 @@ export default function Hero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.2 }}
-              className="aspect-square overflow-hidden rounded-2xl border border-zinc-200 shadow-xl dark:border-zinc-800"
+              className="relative aspect-square overflow-hidden rounded-2xl border border-zinc-200 shadow-xl dark:border-zinc-800"
             >
               <motion.img
                 src={img2}
@@ -105,6 +115,21 @@ export default function Hero() {
                 animate={{ y: [0, -8, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
               />
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <div className="relative">
+                  <div className="absolute -inset-6 rounded-full bg-fuchsia-500/10 blur-xl" />
+                  <div className="absolute inset-0" aria-hidden="true">
+                    {/* Lottie sparkles web component */}
+                    <dotlottie-player
+                      autoplay
+                      loop
+                      mode="normal"
+                      src="https://lottie.host/3a1e4eec-4e8e-4a6b-9d9a-9bb5a2f0f2a0/v0K3fH8n5Y.json"
+                      style={{ width: 120, height: 120 }}
+                    />
+                  </div>
+                </div>
+              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

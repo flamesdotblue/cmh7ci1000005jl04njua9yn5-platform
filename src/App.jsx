@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import ProductGrid from './components/ProductGrid'
+import OutfitBuilder from './components/OutfitBuilder'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
       <main>
         <Hero />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ProductGrid />
+          <OutfitBuilder />
         </div>
       </main>
       <Footer />
