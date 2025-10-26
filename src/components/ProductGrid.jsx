@@ -10,7 +10,7 @@ const products = [
     rating: 4.7,
     category: 'Techwear',
     tag: 'Viral',
-    color: 'from-zinc-900 to-zinc-700',
+    image: 'https://images.unsplash.com/photo-1543862470-9fdbbe0b5d44?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const products = [
     rating: 4.5,
     category: 'Streetwear',
     tag: 'New',
-    color: 'from-slate-900 to-slate-700',
+    image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const products = [
     rating: 4.8,
     category: 'Athleisure',
     tag: 'Restock',
-    color: 'from-fuchsia-700 to-fuchsia-500',
+    image: 'https://images.unsplash.com/photo-1549576490-b0b4831ef60a?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const products = [
     rating: 4.2,
     category: 'Y2K',
     tag: 'Limited',
-    color: 'from-cyan-700 to-cyan-500',
+    image: 'https://images.unsplash.com/photo-1548883354-1a3c84b71b39?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 5,
@@ -46,7 +46,7 @@ const products = [
     rating: 4.9,
     category: 'Minimal',
     tag: 'Sustainable',
-    color: 'from-zinc-800 to-zinc-600',
+    image: 'https://images.unsplash.com/photo-1542060748-10c28b62716d?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 6,
@@ -55,7 +55,7 @@ const products = [
     rating: 4.4,
     category: 'Y2K',
     tag: 'Viral',
-    color: 'from-violet-700 to-violet-500',
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 7,
@@ -64,7 +64,7 @@ const products = [
     rating: 4.6,
     category: 'Athleisure',
     tag: 'New',
-    color: 'from-emerald-700 to-emerald-500',
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 8,
@@ -73,7 +73,7 @@ const products = [
     rating: 4.3,
     category: 'Streetwear',
     tag: 'Restock',
-    color: 'from-sky-700 to-sky-500',
+    image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
   },
 ]
 
@@ -144,13 +144,23 @@ export default function ProductGrid() {
         {filtered.map((p, idx) => (
           <motion.div
             layout
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: idx * 0.05 }}
             key={p.id}
             className="group overflow-hidden rounded-2xl border border-zinc-200 bg-white/70 shadow-sm backdrop-blur transition hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900/70"
           >
-            <div className={`relative aspect-[4/5] w-full bg-gradient-to-br ${p.color}`}>
+            <div className="relative aspect-[4/5] w-full overflow-hidden">
+              <motion.img
+                src={p.image}
+                alt={p.name}
+                className="h-full w-full object-cover"
+                loading="lazy"
+                initial={{ scale: 1.05 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+              />
               <div className="absolute left-3 top-3 flex gap-2">
                 <span className="rounded-full bg-white/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-900 shadow dark:bg-zinc-100">
                   {p.tag}
@@ -163,6 +173,11 @@ export default function ProductGrid() {
               >
                 <Heart size={16} className={wishlist.has(p.id) ? 'fill-zinc-900 text-zinc-900' : ''} />
               </button>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zinc-950/50 to-transparent"
+              />
             </div>
             <div className="p-3">
               <div className="flex items-start justify-between gap-2">
@@ -179,10 +194,14 @@ export default function ProductGrid() {
                   <div className="font-semibold">${p.price}</div>
                 </div>
               </div>
-              <button className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white/70 px-3 py-2 text-sm transition hover:bg-zinc-100 group-hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900/70 dark:hover:bg-zinc-800">
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                whileHover={{ y: -1 }}
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white/70 px-3 py-2 text-sm transition hover:bg-zinc-100 group-hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900/70 dark:hover:bg-zinc-800"
+              >
                 <ShoppingBag size={16} />
                 Add to bag
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         ))}

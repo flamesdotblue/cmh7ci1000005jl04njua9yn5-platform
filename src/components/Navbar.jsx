@@ -20,7 +20,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-30 w-full backdrop-blur supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-zinc-950/50 border-b border-zinc-200/40 dark:border-zinc-800/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2">
-          <button onClick={() => setOpen(!open)} className="lg:hidden rounded-md p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800">
+          <button onClick={() => setOpen(!open)} className="lg:hidden rounded-md p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800" aria-label="Toggle menu">
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
           <a href="#" className="group flex items-center gap-2 font-bold tracking-tight">
